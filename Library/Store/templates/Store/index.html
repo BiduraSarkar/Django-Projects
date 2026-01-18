@@ -1,0 +1,11 @@
+<table>
+<tr><td>Book ID</td><td>Book Name</td></tr>
+{% for book in book_list %}
+<tr>
+    <!--<td><a href="/Store/{{book.id}}">{{book.id}}</a></td>  Hard coded URLS are not good as the first part of the URL Pattern can change-->
+    <td><a href="{% url 'Store:details' book.id %}">{{book.id}}</a></td>
+    <!--here we are using the url tag-->
+    <td>{{book.book_name}}</td>
+</tr>
+{% endfor %}
+</table>
