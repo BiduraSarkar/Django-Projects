@@ -12,3 +12,4 @@ class Book(models.Model):
     publisher = models.CharField(max_length = 255)
     edition = models.IntegerField(default = 1)
     genre = models.CharField(max_length = 255)
+    image = models.CharField(max_length = 255,default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNHV0HnZFjnPVeDJnh_jxfSaaxOJaazyc6Kw&s")

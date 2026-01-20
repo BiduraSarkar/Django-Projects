@@ -1,0 +1,8 @@
+body
+{
+ background-color:rgb(128, 224, 213);
+}
+table, th, td {
+  border: 3px double rgb(17, 10, 76); /* Sets border width, style, and color */
+  padding: 8px; /* Adds space between content and border for readability */
+}

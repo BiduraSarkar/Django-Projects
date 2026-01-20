@@ -11,6 +11,7 @@ def index(request):
     return render(request,'Store/index.html',context)
 
 def details(request,id):
+    book_list = Book.objects.all()
     book = Book.objects.get(id = id)
-    context = {'book':book}
+    context = {'book':book,'book_list':book_list}
     return render(request,'Store/details.html',context)
