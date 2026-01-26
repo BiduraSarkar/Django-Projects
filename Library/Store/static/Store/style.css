@@ -1,8 +1,10 @@
 body
 {
- background-color:rgb(128, 224, 213);
+ background-color:rgb(32, 95, 99);
 }
 table, th, td {
-  border: 3px double rgb(17, 10, 76); /* Sets border width, style, and color */
+  background-color: white;
+  border: 5px double rgb(17, 10, 76); /* Sets border width, style, and color */
+  border-radius: 4px ;
   padding: 8px; /* Adds space between content and border for readability */
 }

@@ -1,13 +1,21 @@
 {% extends 'Store/base.html' %}
 {% block body %}
-<div class="flex justify-between px-50 py-10">
+<div class="flex justify-between px-70 py-10">
 <div>
-<table>
+{% if user.is_authenticated %}
+<a  class=" bg-blue-500 font-semibold px-2 py-2 m-10 rounded-md" href="{% url 'Store:add_book' %}">Add Book</a>
+{% endif %}
+<br/>
+<table class="m-10">
 <tr><th>Book Details</th><th>Book Name</th></tr>
 {% for book in book_list %}
 <tr>
     <!--<td><a href="/Store/{{book.id}}">{{book.id}}</a></td>  Hard coded URLS are not good as the first part of the URL Pattern can change-->
-    <td><a class=" bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md" href="{% url 'Store:details' book.id %}">View Details</a></td>
+    <td>
+        {% if user.is_authenticated %}
+        <a class=" bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md" href="{% url 'Store:details' book.id %}">View Details</a>
+        {% endif %}
+    </td>
     <!--here we are using the url tag-->
     <td>{{book.book_name}}</td>
 </tr>

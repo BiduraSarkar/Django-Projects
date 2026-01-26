@@ -1,0 +1,10 @@
+
+{% extends 'Store/base.html' %}
+{% block body %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+<button type="Submit">SAVE</button>
+</form>
+{% endblock %}

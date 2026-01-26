@@ -1,13 +1,15 @@
 {% extends 'Store/index.html' %}
 {% block body2 %}
 <table>
+    <tr><th>Book Cover</th><td><img height=200 width=250 src="{{book.image}}"/></td></tr>
     <tr><th>Book Name</th><td>{{book.book_name}}</td></tr>
     <tr><th>Author</th><td>{{book.author}}</td></tr>
     <tr><th>Publisher</th><td>{{book.publisher}}</td></tr>
     <tr><th>Edition</th><td>{{book.edition}}</td></tr>
     <tr><th>Genre</th><td>{{book.genre}}</td></tr>
-    <tr><th>Image</th><td><img height=100 width=150 src="{{book.image}}"/></td></tr>
 </table>
-<button class="bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md">Edit</button>
-<button class="bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md">Delete</button>
+{% if user.is_superuser %}
+<button class="bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md"><a href="{%url 'Store:update_book' book.id %}">Edit</a></button>
+<button class="bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md"><a href="{%url 'Store:delete_book' book.id %}">Delete</a></button>
+{% endif %}
 {% endblock %}

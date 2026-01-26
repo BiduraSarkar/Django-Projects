@@ -1,0 +1,9 @@
+<h1>Welcome to B-Library</h1>
+<h4>Please Login to Continue !</h4>
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">LOGIN</button>
+    <br/>
+    <button><a href="{% url 'Users:register' %}">REGISTER</a></button>
+</form>
