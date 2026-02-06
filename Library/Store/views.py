@@ -4,14 +4,23 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from .models import Book
 from .forms import BookForm
 from django.contrib import messages
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
-def index(request):
-    book_list = Book.objects.all()
-    context = {
-        'book_list':book_list
-    }
-    return render(request,'Store/index.html',context)
+#def index(request):
+    
+    #book_list = Book.objects.all()
+    #context = {
+        #'book_list':book_list
+    #}
+    #return render(request,'Store/index.html',context)
+
+class IndexClassView(ListView):
+    model = Book
+    template_name = "Store/index.html"
+    context_object_name = 'book_list'
 
 @login_required
 def details(request,id):
@@ -28,7 +37,13 @@ def add_book(request):
             form.save()
             return redirect('Store:index')
     context={'form':form}
-    return render(request,'Store/bookform.html',context)
+    return render(request,'Store/book_form.html',context)
+
+#class BookCreateView(CreateView):
+    #automatically looks for book_form.html and renders it
+    #model = Book
+    #fields=['book_name','author','publisher','edition','genre','image']
+    #redirect url is mentioned in Book model definition
 
 @login_required
 def update_book(request,id):
@@ -38,7 +53,12 @@ def update_book(request,id):
         form.save()
         return redirect('Store:index')
     context = {'form':form}
-    return render(request,'Store/bookform.html',context)
+    return render(request,'Store/book_form.html',context)
+
+#class BookUpdateView(UpdateView):
+    #model = Book
+    #fields=['book_name','author','publisher','edition','genre','image'] 
+    #template_name_suffix = "_form"
 
 @login_required
 def delete_book(request,id):
@@ -46,4 +66,9 @@ def delete_book(request,id):
     if request.method == 'POST':
         book.delete()
         return redirect('Store:index')
-    return render(request,'Store/delete.html')
+    return render(request,'Store/book_confirm_delete.html')
+
+
+#class BookDeleteView(DeleteView):
+    #model = Book
+    #success_url = reverse_lazy("Store:index")

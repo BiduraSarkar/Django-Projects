@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 #note that models are classes which inherit property of Model Class
@@ -7,6 +9,9 @@ class Book(models.Model):
     def __str__(self):
         return "Name = " + self.book_name + " Author = "+ self.author + " Publisher = " + self.publisher + " Genre = " + self.genre + " Edition = " + str(self.edition) + "\n"
     
+    def get_absolute_url(self):
+        return reverse('Store:index')
+
     book_name = models.CharField(max_length = 255)
     author = models.CharField(max_length = 255)
     publisher = models.CharField(max_length = 255)

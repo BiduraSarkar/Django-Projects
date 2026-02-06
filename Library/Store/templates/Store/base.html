@@ -19,6 +19,7 @@
             {% if user.is_authenticated %}
                 <h3>Welcome {{user.username}} !</h3>
                 <button class="bg-blue-500 font-semibold py-2 px-2 rounded-md"><a href="{% url 'Users:logout' %}">LOGOUT</a></button>
+                <button class="bg-blue-500 font-semibold py-2 px-2 rounded-md"><a href="{% url 'Users:profile' %}">VIEW PROFILE</a></button>
             {% else %}
                 <button class="bg-blue-500 font-semibold py-2 px-2 rounded-md"><a href="{% url 'Users:login' %}">LOGIN TO CONTINUE</a></button>
                 <button class="bg-blue-500 font-semibold py-2 px-2 rounded-md"><a href="{% url 'Users:register' %}">REGISTER</a></button>
