@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -18,3 +19,4 @@ class Book(models.Model):
     edition = models.IntegerField(default = 1)
     genre = models.CharField(max_length = 255)
     image = models.CharField(max_length = 255,default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNHV0HnZFjnPVeDJnh_jxfSaaxOJaazyc6Kw&s")
+    added_by = models.ForeignKey(User,on_delete=models.CASCADE,default = 1)

@@ -1,9 +1,26 @@
-<h1>Welcome to B-Library</h1>
-<h4>Please Login to Continue !</h4>
-<form method="POST">
+{% extends 'Store/base.html' %}
+{% block body %}
+<div class="flex flex-col justify-center items-center p-40">
+<form method="POST" class="bg-white p-5 rounded-md">
     {% csrf_token %}
-    {{form}}
-    <button type="submit">LOGIN</button>
-    <br/>
-    <button><a href="{% url 'Users:register' %}">REGISTER</a></button>
+    <div class="bg-red-400 text-white">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            {{error}}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+    <label>Username</label>
+    <div class="border rounded p-2 m-2"> {{form.username}} </div>
+    </div>
+    <div>
+    <label>Password</label>
+    <div class="border rounded p-2 m-2">{{form.password}}</div>
+    </div>
+    
+    <button class="bg-blue-500 text-white font-semibold px-2 py-2 m-4 rounded-md" type="submit">LOGIN</button>
+    <button class="bg-blue-500 text-white font-semibold px-2 py-2 m-4 rounded-md"><a href="{% url 'Users:register' %}">REGISTER</a></button>
 </form>
+</div>
+{% endblock %}

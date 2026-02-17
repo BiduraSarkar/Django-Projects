@@ -1,5 +1,26 @@
-<form method="POST">
+{% extends 'Store/base.html' %}
+{% block body %}
+<div class="flex flex-col justify-center items-center p-20">
+    <form method="POST" class="bg-white shadow-lg p-5 rounded-md ">
     {% csrf_token %}
-    {{form}}
-    <button type="submit">REGISTER</button>
+    <div class="bg-red-400 text-white">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            {{error}}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        {% for field in form %}
+        <div>
+        <label>{{field.label}}</label>
+        <div class="border px-4 m-4 rounded">{{field}}</div>
+        </div>
+        {% endfor %}
+    </div>
+<div class="py-4">
+    <button class="bg-blue-500 text-white w-90 h-10" type="Submit">REGISTER</button>
+</div>
 </form>
+</div>
+{% endblock %}

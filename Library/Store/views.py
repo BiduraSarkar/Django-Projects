@@ -20,7 +20,8 @@ from django.urls import reverse_lazy
 class IndexClassView(ListView):
     model = Book
     template_name = "Store/index.html"
-    context_object_name = 'book_list'
+    context_object_name = 'book_list' 
+
 
 @login_required
 def details(request,id):
@@ -34,6 +35,7 @@ def add_book(request):
     form = BookForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
+            form.instance.added_by = request.user
             form.save()
             return redirect('Store:index')
     context={'form':form}
@@ -50,7 +52,8 @@ def update_book(request,id):
     book = Book.objects.get(id = id)
     form = BookForm(request.POST or None, instance = book)
     if form.is_valid():
-        form.save()
+        if request.user.is_superuser or book.added_by.id == request.user.id:
+            form.save()
         return redirect('Store:index')
     context = {'form':form}
     return render(request,'Store/book_form.html',context)
@@ -64,7 +67,8 @@ def update_book(request,id):
 def delete_book(request,id):
     book = Book.objects.get(id = id)
     if request.method == 'POST':
-        book.delete()
+        if request.user.is_superuser or book.added_by.id == request.user.id:
+            book.delete()
         return redirect('Store:index')
     return render(request,'Store/book_confirm_delete.html')
 

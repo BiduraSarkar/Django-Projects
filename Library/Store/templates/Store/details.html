@@ -7,9 +7,11 @@
     <tr><th>Publisher</th><td>{{book.publisher}}</td></tr>
     <tr><th>Edition</th><td>{{book.edition}}</td></tr>
     <tr><th>Genre</th><td>{{book.genre}}</td></tr>
+    <tr><th>Donated By</th><td>{{book.added_by}}</td></tr>
+    
 </table>
-{% if user.is_superuser %}
-<button class="bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md"><a href="{%url 'Store:update_book' book.id %}">Edit</a></button>
-<button class="bg-blue-500 font-semibold px-2 py-2 m-4 rounded-md"><a href="{%url 'Store:delete_book' book.id %}">Delete</a></button>
+{% if user.id == book.added_by.id  or user.is_superuser %}
+<button class="bg-blue-500 text-white font-semibold px-2 py-2 m-4 rounded-md"><a href="{%url 'Store:update_book' book.id %}">Edit</a></button>
+<button class="bg-blue-500 text-white font-semibold px-2 py-2 m-4 rounded-md"><a href="{%url 'Store:delete_book' book.id %}">Delete</a></button>
 {% endif %}
 {% endblock %}
